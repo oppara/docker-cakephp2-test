@@ -1,0 +1,48 @@
+version: '3.3'
+services:
+  db:
+    container_name: cake_mysql
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: cake
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3314:3306"
+    volumes:
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+  db_test:
+    container_name: cake_mysql_test
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: cake_test
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3315:3306"
+    volumes:
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+    # networks:
+      # vpcbr:
+        # ipv4_address: 172.26.0.2
+
+  php:
+    container_name: cake_php
+    build: ./docker/php
+    image: php_mysql
+    volumes:
+      - ../src:/srv
+    # networks:
+      # vpcbr:
+        # ipv4_address: 172.26.0.3
+
+# networks:
+  # vpcbr:
+    # ipam:
+      # driver: default
+      # config:
+        # - subnet: 172.26.0.0/16
