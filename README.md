@@ -11,3 +11,6 @@
     $ make up
     $ make setup
     $ make test
+
+
+[cakephp/.travis.yml at 2.x · cakephp/cakephp](https://github.com/cakephp/cakephp/blob/2.x/.travis.yml)
