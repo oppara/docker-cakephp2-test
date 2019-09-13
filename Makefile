@@ -19,8 +19,9 @@ bash:
 	$(BASH)
 
 setup:
-	$(BASH) -c "cd $(SRC) && composer install"
+	cd $(PWD)/../src && git checkout -b 2.x origin/2.x
 	cat $(PWD)/config/database.php > $(PWD)/../src/app/Config/database.php
+	cd $(PWD) && $(BASH) -c "cd $(SRC) &&  composer install"
 
 test:
 ifdef group
